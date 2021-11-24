@@ -1,15 +1,19 @@
+/* Check development */
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config()
   }
 
+/* Initial setup */
 const express = require("express")
 const app = express()
 const expressLayouts = require("express-ejs-layouts")
 const indexRouter = require("./routes/index")
 const authorsRouter = require("./routes/authors")
+const bookRouter = require("./routes/books")
 const mongoose = require("mongoose")
 const bodyParser = require("body-parser")
 
+/* Initial Sets & Uses */
 app.set("view engine", "ejs")
 app.set("views", __dirname + "/views")
 app.set("layout", __dirname + "/views/layouts/layout")
@@ -25,11 +29,10 @@ const db = mongoose.connection
 db.on("error", (error) => { console.error(error) })
 db.once("open", () => { console.log("connected to mongoose") })
 
-
 /*  ROUTES  */
 app.use("/", indexRouter)
 app.use("/authors", authorsRouter)
+app.use("/books", bookRouter)
 
-app
-
+/* Deploy to port */
 app.listen(process.env.PORT || 3000)

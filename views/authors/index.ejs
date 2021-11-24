@@ -1,3 +1,6 @@
+<% if(locals.searchOptions == null) {
+    locals.searchOptions.name = ""
+} %>
 <h2>Search Authors</h2>
 <form action="/authors" method="GET">
     <label for="name">Name</label>
