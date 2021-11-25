@@ -12,6 +12,7 @@ const authorsRouter = require("./routes/authors")
 const bookRouter = require("./routes/books")
 const mongoose = require("mongoose")
 const bodyParser = require("body-parser")
+const methodOverride = require("method-override")
 
 /* Initial Sets & Uses */
 app.set("view engine", "ejs")
@@ -20,7 +21,7 @@ app.set("layout", __dirname + "/views/layouts/layout")
 app.use(expressLayouts)
 app.use(express.static("public"))
 app.use(bodyParser.urlencoded({limit: '10mb', extended: false}))
-
+app.use(methodOverride("_method"))
 /* MONGOOSE */
 mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true})
 const db = mongoose.connection

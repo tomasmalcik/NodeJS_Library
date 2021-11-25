@@ -1,4 +1,5 @@
 <% if(locals.searchOptions == null) {
+    locals.searchOptions = {}
     locals.searchOptions.name = ""
 } %>
 <h2>Search Authors</h2>
@@ -11,4 +12,8 @@
 <br>
 <% authors.forEach(author => { %>
     <div><%= author.name %> </div>
-<% }) %> 
+    <a href="/authors/<%= author.id %>">View</a>
+    <a href="/authors/<%= author.id %>/edit">Edit</a>
+    <%- include('../partials/deleteForm.ejs',
+              { url: `/authors/${author.id}` }) %>
+<% }) %>
